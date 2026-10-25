@@ -1,0 +1,13 @@
+{
+  "name": "quality-holmium-solution",
+  "version": "1.0.0",
+  "title": "Quality Holmium Solution",
+  "author": "rykon_",
+  "factorio_version": "2.1",
+  "dependencies": [
+    "base >= 2.1.0",
+    "space-age >= 2.1.0",
+    "quality >= 2.1.0"
+  ],
+  "description": "Higher quality holmium ore gives more holmium solution. Adds one holmium solution recipe per quality to the chemical plant, no new buildings."
+}

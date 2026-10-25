@@ -1,0 +1,10 @@
+---------------------------------------------------------------------------------------------------
+Version: 1.0.0
+Date: ????
+  Features:
+    - Initial release.
+    - One holmium solution recipe per quality (uncommon and better) for the chemical plant. Each only accepts holmium ore of exactly that quality.
+    - Startup setting for the extra output per quality level (default 50%: uncommon 150, rare 200, epic 250, legendary 350 solution per craft).
+    - Startup setting to lock the vanilla recipe to normal ingredients (default on).
+    - The new recipes are unlocked together with the vanilla recipe (Holmium processing), also in existing saves.
+    - English and German locale.
