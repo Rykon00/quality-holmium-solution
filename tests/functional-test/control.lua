@@ -38,7 +38,7 @@ local function setup()
     else pass("recipe " .. name .. " unlocked, fixed ingredient qualities") end
   end
 
-  local eei = surface.create_entity{name = "electric-energy-interface", position = {-30, -6}, force = force}
+  local eei = surface.create_entity{name = "electric-energy-interface", position = {-23, 6}, force = force}
   eei.electric_buffer_size = 1e10
   eei.power_production = 1e9
   eei.energy = 1e10
