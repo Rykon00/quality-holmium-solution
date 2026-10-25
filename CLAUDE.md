@@ -32,7 +32,10 @@ copied Steam binary).
   than `factorio_version` is out.
 - `release.yml`: on a published GitHub release. Checks tag = `v` + info.json version and a dated changelog section,
   builds the zip, runs the load check, attaches the zip to the release and uploads it to the mod portal with the
-  repository secret `FACTORIO_API_KEY`.
+  repository secret `FACTORIO_API_KEY`. If the portal does not know the mod yet (`UnknownMod`), it publishes it
+  instead (Mod publish API: `init_publish`, with README.md up to "## Build" as description, category and license
+  from `PORTAL_CATEGORY`/`PORTAL_LICENSE` in the workflow and the repo as source URL). The key needs the usages
+  "ModPortal: Upload Mods" and "ModPortal: Publish Mods".
 
 ## Release
 

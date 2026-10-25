@@ -8,3 +8,5 @@ Date: ????
     - Startup setting to lock the vanilla recipe to normal ingredients (default on).
     - The new recipes are unlocked together with the vanilla recipe (Holmium processing), also in existing saves.
     - English and German locale.
+  Info:
+    - Added a thumbnail (vanilla icons): holmium ore of every quality, holmium solution and growing output bars.
