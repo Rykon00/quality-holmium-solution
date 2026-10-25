@@ -1,23 +1,35 @@
 name: Release
 
+# Runs when a GitHub release is published by hand, and is called by port.yml after an automatic
+# port (a release made by a workflow's GITHUB_TOKEN does not trigger other workflows).
+
 on:
   release:
     types: [published]
+  workflow_call:
+    inputs:
+      tag:
+        description: Release tag (v<version>) to build, attach and upload
+        required: true
+        type: string
 
 permissions:
   contents: write
 
 env:
   LOAD_CHECK_MODES: "space-age"
+  TAG: ${{ inputs.tag || github.event.release.tag_name }}
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.event.release.tag_name }}
 
       - name: Check tag, info.json version and changelog
-        run: python3 tools/build.py --check-release "${{ github.event.release.tag_name }}"
+        run: python3 tools/build.py --check-release "$TAG"
 
       - name: Build the mod zip
         id: build
@@ -29,13 +41,15 @@ jobs:
           tar -xJf "$RUNNER_TEMP/factorio.tar.xz" -C "$RUNNER_TEMP"
           modes=""
           for m in $LOAD_CHECK_MODES; do modes="$modes --mode $m"; done
+          tests=""
+          if [ -d tests/functional-test ]; then tests="--test-mod tests/functional-test"; fi
           python3 tools/load_check.py --factorio "$RUNNER_TEMP/factorio/bin/x64/factorio" \
-            --zip "${{ steps.build.outputs.zip }}" $modes --work "$RUNNER_TEMP/load-check"
+            --zip "${{ steps.build.outputs.zip }}" $modes $tests --work "$RUNNER_TEMP/load-check"
 
       - name: Attach the zip to the release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload "${{ github.event.release.tag_name }}" "${{ steps.build.outputs.zip }}" --clobber
+        run: gh release upload "$TAG" "${{ steps.build.outputs.zip }}" --clobber
 
       - name: Upload to the Factorio mod portal
         env:
