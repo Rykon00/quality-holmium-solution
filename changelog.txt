@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.0
-Date: ????
+Date: 25. 10. 2026
   Features:
     - Initial release.
     - One holmium solution recipe per quality (uncommon and better) for the chemical plant. Each only accepts holmium ore of exactly that quality.
